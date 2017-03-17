@@ -26,6 +26,9 @@ Database Server
 
 # HTML Basics
 
+<iframe src="https://player.vimeo.com/video/152475600" width="640" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<p><a href="https://vimeo.com/152475600">HTML Basics Live Demo</a> from <a href="https://vimeo.com/user35425389">LEARN</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+
 See also <a href="https://www.youtube.com/watch?v=657YnQs2hVw" target="_blank">CS50 HTML</a>
 
 ## Tags to Know
@@ -188,6 +191,8 @@ Put the app to 1 account, then fork it to the other account.
 # jQuery absolute primer
 
 jQuery is a Javascript library that makes it easy to make web pages interactive.
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/T2mFyPxL-fU" frameborder="0" allowfullscreen></iframe>
 
 ## First thing first with jQuery
 
