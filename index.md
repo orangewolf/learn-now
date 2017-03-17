@@ -111,7 +111,7 @@ These are tags with clear semantics:
     <h2>My Second Section</h2>
   </body>
 </html>
-````
+```
 
 # Challenge
 Create a basic html file with the following properties
@@ -494,3 +494,5 @@ As a user I can enter a question on a web page and magically get an answer to my
 1. Make the click listener show what's in the input field in the paragraph section. Use the jQuery function `.text()`.
 1. Clear the input field after the button is clicked.
 1. Reuse your code from the previous Magic 8 Ball challenge to give a random answer.
+
+# What's Next
