@@ -180,8 +180,310 @@ Create a basic html file with the following properties
   </tr>
 </table>
 
+# Challenge
+Create your Github account if you do not have one yet, then add your html page from above to each persons Github account.
+
+Put the app to 1 account, then fork it to the other account.
+
 # jQuery absolute primer
 
-## Include jQuery in your HTML file
+jQuery is a Javascript library that makes it easy to make web pages interactive.
 
-test
+## First thing first with jQuery
+
+We need to tell our html page to use jQuery. We can download the latest uncompressed version from <a href="https://jquery.com/download/" target="_blank">jQuery website</a> and
+move it into your js folder or use the CDN as pictured below. jQuery, like many popular JavaScript libraries, serves their code from a public CDN, which we're using here. The convenient thing about using their CDN is that web browsers cache these files when they are first downloaded, which saves load time the next time the browser visits a page using that library.  If your browser has the file cached, it can use that file immediately instead of having to download it again. You can also serve JQuery from your own application.
+
+Let's also make a file for our own JavaScript code, and then begin developing our page with this HTML. It's important that our own js file goes after the standard jQuery file, as it will rely on jQuery functionality that must be loaded first. And similar to Bootstrap, you can reference the file <a href="http://code.jquery.com" target="_blank" >directly</a> in the script tag.
+
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script src="yourfile.js"></script>
+</head>
+<body>
+  <h1>This is a heading</h1>
+</body>
+</html>
+```
+
+## Document Ready?
+
+When a web page loads, it is loading an HTML document, and that document will have other files to load with it, such as a css file, or javascript file. JQuery uses the DOM but since it simplifies HTML document traversing by accessing the p tags, div tags, button tags, and so on, the HTML document needs to be fully loaded before loading jQuery, otherwise jQuery is adding event listiners and button clicks to HTML tags that are not present. We load jQuery by wrapping it in a document `.ready` function.
+
+Use the following file:
+
+js/yourfile.js:
+```javascript
+alert("Your js is running");
+$(document).ready(function() {
+  alert("document is ready");
+});
+alert("Your js has run");
+```
+
+Jquery will run the callback function that is passed into `.ready()`. Then that function will run our code. Generally, it's a good idea to wrap your JavaScript in a function passed to `.ready()`
+
+
+## Working with jQuery
+
+Working with jQuery, is as easy as calling a function, because that's all jQuery is, a function. We can call jQuery two ways, by explicitly saying `JQuery` or to save time, and the most common way, by typing the `$`.
+
+One thing that the jQuery function does is to select HTML elements on the page, based on the argument you pass into it. The selectors are exactly the same as those in CSS. And *all* of those tags will be selected.
+
+These are selectors:
+
+```javascript
+jQuery("tag")
+jQuery(".class")
+jQuery("#id")
+```
+Instead of having to type jQuery every time, we can use `$` to replace jQuery. And from now on we will use `$` when accessing the jQuery library. ie
+
+```javascript
+$("tag")
+$(".class")
+$("#id")
+```
+
+## Your first click listener
+
+Use the following in your HTML file:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="js/jquery/1.12.0/jquery.min.js"></script>
+  <script src="js/yourfile.js"></script>
+</head>
+<body>
+
+  <h2>This is a heading</h2>
+
+  <p>This is a paragraph.</p>
+  <p>This is another paragraph.</p>
+  <p id="test">This is another paragraph.</p>
+  <p class="test">Yet another paragraph.</p>
+  <button>Click me</button>
+
+</body>
+</html>
+```
+
+
+In your javascript file put in:
+*js/yourfile.js*
+```javascript
+$(document).ready(function() {
+  $("button").on(
+    "click",
+    function() {
+      $("p").hide();
+    });
+  });
+```
+
+or
+
+```javascript
+$(document).ready(function(){
+  $("button").on(
+    "click",
+    function() {
+      $(".test").hide();
+    });
+});
+```
+
+or
+
+```javascript
+$(document).ready(function(){
+  $("button").on(
+    "click",
+    function() {
+      $("#test").hide();
+  });
+});
+```
+
+So, for example the code `jQuery("p")` selects all of the paragraphs on the page or
+the code `jQuery(".test")` selects all the elements with `class="test"` and
+the code `jQuery("#test")` selects the all the elements with the id of test.
+
+After we select the elements, we use methods to attach an event handler to them.
+In this case the `.on()` method. The event handler "listens" to the elements and responds when they're "clicked".
+
+```html
+...
+<body>
+  <!-- Add this -->
+  <p>Click!</p>
+  <button id="btn1">Don't Click</button>
+  <button id="btn2">Really don't click</button>
+</body>
+...
+```
+Then in your javascript file:
+
+```javascript
+$(document).ready(function(){
+  // Add this
+  $("#btn1").on(
+    "click",
+    function() {
+      alert("You clicked the button, didn't you?");
+    });
+  $("#btn2").on("click",
+    function() {
+      alert("You clicked the other button - try doing it again, I dare you!");
+  });
+  ...
+});
+```
+
+And we can also make the buttons stop:
+
+```javascript
+$(document).ready(function(){
+  // Change this
+  $("#btn2").on("click",
+    function(){
+      alert("You clicked the other button - try doing it again!");
+      $("#btn2").off("click");      // Add this line
+  });
+  ...
+});
+```
+
+You can click on the buttons once and it will never work again. `.off()` removes a listener, in this case the click listener.
+
+## Hiding and Seek
+
+We can have elements that while still in the DOM are not visible.
+
+```html
+...
+<body>
+  <!-- Add this -->
+  <p>If you click on the "Hide" button, I will disappear.</p>
+  <p>If you click on the "Toggle" button, I will disappear and come back.</p>
+
+  <button id="hide">Hide</button>
+  <button id="show">Show</button>
+  <button id="toggle">Toggle</button>
+
+</body>
+...
+```
+
+We can target out the first and second element of your selection
+
+```javascript
+$(document).ready(function(){
+  $("#hide").on("click",
+    function(){
+      $("p").hide();
+  });
+  $("#show").on("click",
+    function(){
+      $("p").first().show();
+  });
+  $("#toggle").on("click",
+    function(){
+      // $("#second").toggle();
+      $("p").eq(1).toggle();
+  });
+});
+```
+
+```html
+...
+<body>
+
+  <!-- Add this -->
+  <div id="div1" style="height:100px;width:300px;border:1px solid black;">
+
+    This is some text in the div, not a p tag.
+    <p>This is a paragraph in the div.</p>
+    <p>This is another paragraph in the div.</p>
+
+  </div>
+  <br/>
+
+  <button id="removeSecondPara">Remove second p element</button>
+
+  <button id="removeP">Remove all p elements</button>
+
+  <button id="removeDiv">Remove div element</button>
+
+</body>
+...
+```
+```javascript
+$(document).ready(function(){
+  // Add this
+  $("#removeSecondPara").on("click",      
+    function() {
+      $("p").eq(1).remove();
+  });
+  $("#removeP").on("click",
+    function() {
+      $("p").remove();
+  });
+  $("#removeDiv").on("click",
+    function() {
+      $("#div1").remove();
+  });
+});
+```
+
+## Getting and Changing Content with jQuery
+
+For general HTML elements, the `text()` method allows us to get and set the contents:
+
+```javascript
+alert($("p").text());
+$("p").text("New contents...");
+```
+
+This is similar to how the `innerHTML` attribute in the DOM API works (except `text()` is a function).
+
+However, with `input` elements, the `val()` method returns or sets the value attribute of the selected elements (similar to the `value` attribute in the DOM API):
+
+```html
+<p>Hello</p>
+<input type="text" placeholder="Your name here"/>
+<button>Click you</button>
+```
+
+```javascript
+$("input").val();       -> "Input here..."
+$("input").val("Hi There!");
+```
+
+# Challenge
+**Note: It is really important to remember to use `$(document).ready`**
+
+## Magic 8 Ball
+
+As a user I can enter a question on a web page and magically get an answer to my question.
+
+
+**View**
+
+* Create an `input` tag to accept questions from the user. Give it an id of "question".
+* Create a `button` tag to send the question to the Javascript code. Give it an id of "submit".
+* Create a `p` tag to hold the answer the Magic 8 Ball sends back. Give it an id of "answer".
+
+**Controller**
+
+1. Create a click listener for the `button` tag, which opens up an alert.
+1. Make the click listener show what is in the input field. Use the jQuery function `.val()`.
+1. Make the click listener show what's in the input field in the paragraph section. Use the jQuery function `.text()`.
+1. Clear the input field after the button is clicked.
+1. Reuse your code from the previous Magic 8 Ball challenge to give a random answer.
