@@ -1,3 +1,5 @@
+<img alt="logo-learn-academy-green.png" srcset="http://www.learnacademy.org/assets/logo-learn-academy-green@2x-410f5c22a457548bf384daa2d37987b0b44737d92896650009c4637054b8f4e2.png" src="http://www.learnacademy.org/assets/logo-learn-academy-green@1x-4ae654854ec0bd8e233cb1a60664ddeaba0196a464c2d6e37487a76428dd47f4.png" width="168" height="71">
+
 # Tech Stack
 
 ## Front End
